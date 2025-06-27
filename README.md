@@ -71,14 +71,12 @@ To deploy the YOLOv10 Helmet Safety Detection model using Streamlit, run the fol
    <img src='./assets/pred_image_3.png'>
 </p>
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Acknowledgments
 - [YOLOv10](https://github.com/THU-MIG/yolov10) for the base model implementation.
-
 
 ### Notes:
 - Update the installation instructions if there are any additional dependencies specific to your project.
 
 This README provides a comprehensive guide for users to install dependencies, run the application, and understand the project structure.
+
