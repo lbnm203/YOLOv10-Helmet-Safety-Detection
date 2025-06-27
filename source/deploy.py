@@ -47,10 +47,10 @@ def main():
             col1, col2, col3, col4 = st.columns([0.5, 2, 2, 0.5])
             with col2:
                 st.image(uploaded_image, caption="Uploaded Image",
-                         use_column_width=True)
+                         use_container_width=True)
             with col3:
                 st.image(annotated_image, caption="Predicted Image",
-                         use_column_width=True)
+                         use_container_width=True)
 
 
 if __name__ == "__main__":
