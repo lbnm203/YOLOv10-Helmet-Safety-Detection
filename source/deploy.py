@@ -46,7 +46,7 @@ def main():
                 st.error(f"❌ Model prediction failed: {e}")
                 return
         with st.container(border=True):
-            col1, col2, col3, col4 = st.columns([0.5, 2, 2, 0.5])
+            col1, col2, col3, col4 = st.columns([1, 3, 3, 1])
             with col2:
                 st.image(uploaded_image, caption="Uploaded Image",
                          use_container_width=True)
