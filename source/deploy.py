@@ -25,6 +25,8 @@ def process_image(image, model):
 def main():
     st.title('Helmet Safety Detection')
 
+    st.write("---")
+
     file = st.sidebar.file_uploader(
         'Upload Image', type=['jpg', 'png', 'jpeg'])
 
