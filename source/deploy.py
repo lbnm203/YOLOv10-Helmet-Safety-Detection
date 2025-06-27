@@ -23,7 +23,7 @@ def process_image(image, model):
 
 
 def main():
-    st.title('Object Detection for Images')
+    st.title('Helmet Safety Detection')
 
     file = st.sidebar.file_uploader(
         'Upload Image', type=['jpg', 'png', 'jpeg'])
@@ -43,9 +43,8 @@ def main():
             except Exception as e:
                 st.error(f"❌ Model prediction failed: {e}")
                 return
-        with st.container():
-            st.write("## Results")
-            col1, col2, col3, col4 = st.columns([1, 2, 2, 1])
+        with st.container(border=True):
+            col1, col2, col3, col4 = st.columns([0.5, 2, 2, 0.5])
             with col2:
                 st.image(uploaded_image, caption="Uploaded Image",
                          use_column_width=True)
