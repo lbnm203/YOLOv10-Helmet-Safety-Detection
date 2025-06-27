@@ -43,14 +43,15 @@ def main():
             except Exception as e:
                 st.error(f"❌ Model prediction failed: {e}")
                 return
-
-        col1, col2 = st.columns(2)
-        with col1:
-            st.image(uploaded_image, caption="Uploaded Image",
-                     use_column_width=True)
-        with col2:
-            st.image(annotated_image, caption="Predicted Image",
-                     use_column_width=True)
+        with st.container():
+            st.write("## Results")
+            col1, col2, col3, col4 = st.columns([1, 2, 2, 1])
+            with col2:
+                st.image(uploaded_image, caption="Uploaded Image",
+                         use_column_width=True)
+            with col3:
+                st.image(annotated_image, caption="Predicted Image",
+                         use_column_width=True)
 
 
 if __name__ == "__main__":
