@@ -1,25 +1,14 @@
-
-import os
-import sys
 import streamlit as st
 from PIL import Image
 import numpy as np
-import importlib
-
-# Add the yolov10 directory to sys.path at the beginning to prioritize local ultralytics
-sys.path.insert(0, os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '..', 'yolov10')))
-
-# Import YOLOv10 after path modification using importlib
-ultralytics_module = importlib.import_module('ultralytics')
-YOLOv10 = ultralytics_module.YOLOv10
+from ultralytics import YOLO
 
 # Load the trained model
 MODEL_PATH = './models/best.pt'
 
 
 def process_image(image):
-    model = YOLOv10(MODEL_PATH)
+    model = YOLO(MODEL_PATH)
     result = model(image)[0]
     annotated_image = result.plot()  # Plot the bounding boxes on the image
     annotated_image = Image.fromarray(annotated_image)
