@@ -3,39 +3,54 @@ from PIL import Image
 import numpy as np
 from ultralytics import YOLO
 
+st.set_page_config(layout="wide")
+
 # Load the trained model
 MODEL_PATH = './models/best.pt'
 
 
-def process_image(image):
-    model = YOLO(MODEL_PATH)
+@st.cache_resource
+def load_model():
+    return YOLO(MODEL_PATH)
+
+# Process the uploaded image with the model
+
+
+def process_image(image, model):
     result = model(image)[0]
-    annotated_image = result.plot()  # Plot the bounding boxes on the image
-    annotated_image = Image.fromarray(annotated_image)
+    annotated_image = Image.fromarray(result.plot())
     return annotated_image
 
 
 def main():
     st.title('Object Detection for Images')
-    file = st.file_uploader('Upload Image', type=['jpg', 'png', 'jpeg'])
+
+    file = st.sidebar.file_uploader(
+        'Upload Image', type=['jpg', 'png', 'jpeg'])
+
     if file is not None:
-        # Display the uploaded image
-        uploaded_image = Image.open(file)
+        try:
+            uploaded_image = Image.open(file).convert("RGB")
+            image = np.array(uploaded_image)
+        except Exception as e:
+            st.error(f"❌ Failed to load image: {e}")
+            return
 
-        # Process the image
-        image = np.array(uploaded_image)
-        annotated_image = process_image(image)
+        model = load_model()
+        with st.spinner("Running detection..."):
+            try:
+                annotated_image = process_image(image, model)
+            except Exception as e:
+                st.error(f"❌ Model prediction failed: {e}")
+                return
 
-        # Display the images side by side
-        if annotated_image is not None:
-            col1, col2 = st.columns(2)
-            with col1:
-                st.image(uploaded_image, caption="Uploaded Image")
-            with col2:
-                st.image(annotated_image, caption="Predicted Image")
-        else:
-            st.error(
-                "Prediction image not found. Please check the process_image function.")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image(uploaded_image, caption="Uploaded Image",
+                     use_column_width=True)
+        with col2:
+            st.image(annotated_image, caption="Predicted Image",
+                     use_column_width=True)
 
 
 if __name__ == "__main__":
