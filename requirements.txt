@@ -1,2 +1,5 @@
--e yolov10
-streamlit 
+ultralytics>=8.0.0  # Critical for YOLOv8 functionality
+streamlit
+numpy
+opencv-python
+Pillow
