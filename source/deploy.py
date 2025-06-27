@@ -1,6 +1,11 @@
+import os
+import sys
 import streamlit as st
 from PIL import Image
 import numpy as np
+
+# Add the yolov10 directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'yolov10')))
 from ultralytics import YOLOv10
 
 # Load the trained model
